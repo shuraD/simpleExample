@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Vaadin Spring tutorial
 ======================
 
@@ -12,3 +13,6 @@ Run `mvn clean install spring-boot:run` in the project root directory. After the
 ## Running the project from your IDE
 
 Navigate to the `org.vaadin.spring.tutorial.TutorialApplication` class and run it as a Java application.
+=======
+# simpleExample
+>>>>>>> 16590cb38cc06c7b7a62f23abeb6e0d8f8392da8
