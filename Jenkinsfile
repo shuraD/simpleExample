@@ -5,7 +5,7 @@ pipeline {
       steps {
         echo 'Executing this stage first'
       }
-    }
+    
 
     stage('Parallel Stage') {
      for (int i = 0; i < 10; ++i){
@@ -29,6 +29,7 @@ pipeline {
           }
         }
     }
+
 }
 
 }
