@@ -4,33 +4,26 @@ pipeline {
     stage('Non-Parallel Stage') {
       steps {
         echo 'Executing this stage first'
-      }
-    
 
-    stage('Parallel Stage') {
-     for (int i = 0; i < 10; ++i){
-    node{
-        stage('Build') {
-           steps {
-            echo 'Here trigger job: jenkins_job_1. Triggered at time:'
-            sh 'date -u'
-          }
-        }
-        stage('Run') {
-            steps {
-            echo 'Here trigger job: jenkins_job_1. Triggered at time:'
-            sh 'date -u'
-          }
-        }
-        stage('Reporting') {
-            steps {
-            echo 'Here trigger job: jenkins_job_1. Triggered at time:'
-            sh 'date -u'
-          }
-        }
+      }
     }
 
+stage('Build, run, report') {
+    for (int i = 0; i < 10; ++i) {
+        def index = i
+
+        jobs[i] = {
+            node {
+                build job: 'Build', parameters:
+                build 'Run'
+                build 'Reporting'
+            }
+        }
+    }
+    parallel jobs
 }
 
-}
+
+
+  }
 }
