@@ -28,9 +28,8 @@ properties([
 
 node{
     stage('common task'){
-        when(params.manage_steps ==~ /common_task|all_tasks/) {
-            sh "echo common task"   
-        }
+	sh "echo common task"   
+       
     }
     def stages = [failFast: true]
     for (int i = 1; i < params.countTotal.toInteger()+1; i++) {
