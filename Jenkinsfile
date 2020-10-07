@@ -1,4 +1,4 @@
-@Library('adm-jenkins-lib@trunk') _
+
 def performDeploymentStages(String node, String app) {
     stage("build") {
         echo "Building the app [${app}] on node [${node}]"
