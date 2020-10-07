@@ -8,27 +8,26 @@ pipeline {
     }
 
     stage('Parallel Stage') {
-     for (int i = 0; i < 10; ++i){
-    node{
-        stage('Build') {
-           steps {
+      parallel {
+        stage('Parallel Test 1') {
+          steps {
             echo 'Here trigger job: jenkins_job_1. Triggered at time:'
             sh 'date -u'
           }
         }
-        stage('Run') {
-            steps {
-            echo 'Here trigger job: jenkins_job_1. Triggered at time:'
-            sh 'date -u'
-          }
-        }
-        stage('Reporting') {
-            steps {
-            echo 'Here trigger job: jenkins_job_1. Triggered at time:'
-            sh 'date -u'
-          }
-        }
-    }
-}
 
+        stage('Parallel Test 2') {
+          steps {
+            echo 'Here trigger job: jenkins_job_2. Triggered at time:'
+            sh 'date -u'
+            build 'daaa'
+            echo 'Here trigger job: jenkins_job_3. Triggered at time:'
+            sh 'date -u'
+          }
+        }
+
+      }
+    }
+
+  }
 }
