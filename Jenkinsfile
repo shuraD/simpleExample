@@ -1,29 +1,40 @@
-pipeline {
-  agent any
-  stages {
-    stage('Non-Parallel Stage') {
-      steps {
-        echo 'Executing this stage first'
-
-      }
+def performDeploymentStages(String node, String app) {
+    stage("build") {
+        echo "Building the app [${app}] on node [${node}]"
     }
-
-stage('Build, run, report') {
-    for (int i = 0; i < 10; ++i) {
-        def index = i
-
-        jobs[i] = {
-            node {
-                build job: 'Build', parameters:
-                build 'Run'
-                build 'Reporting'
-            }
-        }
+    stage("deploy") {
+        echo "Deploying the app ${app}] on node [${node}]"
     }
-    parallel jobs
+    stage("test") {
+        echo "Testing the app [${app}] on node [${node}]"
+    }
 }
 
 
 
-  }
+pipeline {
+  agent any
+   parameters {
+        string(name: 'NODES', defaultValue: '1,2,3', description: 'Nodes to build, deploy and test')
+        choice(name: 'ENV', choices: 'qa', description: 'Environment')
+        string(name: 'APPS', defaultValue: 'app01,app02', description: 'App names')
+    }
+
+    stages {
+        stage('parallel stage') {
+            steps {
+                script {
+                    def nodes = [:]
+                    for (node in params.NODES.tokenize(',')) {
+                        def apps = [:]
+                        for (app in params.APPS.tokenize(',')) {
+                            performDeploymentStages(node, app)
+                        }
+                        parallel apps
+                    }
+                    parallel nodes
+                }
+            }
+        }
+    }
 }
