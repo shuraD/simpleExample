@@ -20,7 +20,7 @@ pipeline {
           steps {
             echo 'Here trigger job: jenkins_job_2. Triggered at time:'
             sh 'date -u'
-            build 'jenkins_job_2'
+            build 'daaa'
             echo 'Here trigger job: jenkins_job_3. Triggered at time:'
             sh 'date -u'
           }
