@@ -9,6 +9,11 @@ def performDeploymentStages(String node) {
 def printme(String myd,ind)
 {
     stage("${myd}") {
+          
+           def count = 5
+           for (int  i = 1; i <= ind; i++, fact *= i) {
+                     sh(script: "sleep ${i}")
+            } 
          
             echo "Testing on node [${myd}]"
             sh(script: "date -u")
@@ -52,7 +57,9 @@ pipeline {
                          def mynode = node1
                          def myid = id -1 
                          id = id -1 
-                        nodes["${node1}"] = {
+                       /* nodes["${node1}"] = {*/
+                       nodes["master"] = {
+
                             node("${mynode}"){
                                 printme(mynode,myid)
                             }  
