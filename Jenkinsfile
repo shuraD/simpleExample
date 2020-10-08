@@ -57,10 +57,11 @@ pipeline {
                          def mynode = node1
                          def myid = id -1 
                          id = id -1 
-                       /* nodes["${node1}"] = {*/
-                       nodes["master"] = {
+                        nodes["${node1}"] = {
+                       
 
-                            node("${mynode}"){
+                       /*     node("${mynode}"){*/
+                        node("master"){
                                 printme(mynode,myid)
                             }  
                         
