@@ -36,13 +36,13 @@ pipeline {
             steps {
                 script {
                     def tests = [:]
-                    for (f in findFiles(glob: '**/html/*.html')) {
+                    for (f = 0; f <3; f++) {
                         tests["${f}"] = {
-                            
+                            node {
                                 stage("${f}") {
                                     echo '${f}'
                                 }
-                            
+                            }
                         }
                     }
                     parallel tests
