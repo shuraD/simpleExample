@@ -35,7 +35,7 @@ pipeline {
                     for (node1 in params.NODES.tokenize(',')) {
                          def mynode = node1
                         nodes["${node1}"] = {
-                            node{
+                            node("${mynode}"){
                                 printme(mynode)
                             }  
                         
