@@ -7,7 +7,7 @@ def performDeploymentStages(String node, String app) {
         sh 'date -u'
     }
     stage("deploy") {
-        echo "Deploying the app ${app}] on node [${node}]"
+        echo "Deploying the app [${app}] on node [${node}]"
          sh 'date -u'
     }
     stage("test") {
@@ -40,7 +40,7 @@ pipeline {
                         tests["${f}"] = {
                             node {
                                 stage("${f}") {
-                                    sh(script: "echo '${f}'")
+                                    echo "[${f}]"
                                     sh(script: "date -u")
 
                                 }
