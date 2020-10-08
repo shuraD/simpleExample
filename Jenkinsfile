@@ -25,7 +25,9 @@ pipeline {
                 script {
                     def nodes = [:]
                     for (node in params.NODES.tokenize(',')) {
+                        node{
                             performDeploymentStages(node)
+                        }
                     }
                     parallel nodes
                 }
