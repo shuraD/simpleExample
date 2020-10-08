@@ -1,5 +1,6 @@
 
 
+
 def performDeploymentStages(String node, String app) {
     stage("build") {
         echo "Building the app [${app}] on node [${node}]"
@@ -28,7 +29,7 @@ properties([
 ])
 
 pipeline {
-    agent 
+    agent any
     stages {
         stage('1') {
             steps {
