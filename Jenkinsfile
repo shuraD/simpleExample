@@ -1,4 +1,4 @@
-def performDeploymentStages(String node, String app) {
+def performDeploymentStages(String node) {
     stage("build") {
         echo "Building the app [${app}] on node [${node}]"
         sh 'date -u'
@@ -29,11 +29,7 @@ pipeline {
                 script {
                     def nodes = [:]
                     for (node in params.NODES.tokenize(',')) {
-                        def apps = [:]
-                        for (app in params.APPS.tokenize(',')) {
-                            performDeploymentStages(node, app)
-                        }
-                        parallel apps
+                            performDeploymentStages(node)
                     }
                     parallel nodes
                 }
