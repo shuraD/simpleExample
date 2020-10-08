@@ -1,6 +1,3 @@
-
-
-
 def performDeploymentStages(String node) {
                                 node("${node}") {
                                 stage("${node}") {
@@ -12,11 +9,6 @@ def performDeploymentStages(String node) {
                                 }
                             }
 }
-
-
-
-
-
 properties([
     parameters([
         string(name: 'NODES', defaultValue: '1,2', description: 'Nodes to build, deploy and test'),
@@ -40,7 +32,7 @@ pipeline {
                 script {
                     def nodes = [:]
                     for (node in params.NODES.tokenize(',')) {
-                        
+                            echo "${node}"
                             performDeploymentStages(node)
                     }
                     parallel nodes
