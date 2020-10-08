@@ -55,12 +55,15 @@ pipeline {
                 script {
                     def nodes = [:]
                     def id = 3
+                    def id_fornode = 0
                     for (node1 in params.NODES.tokenize(',')) {
                          def mynode = node1
                          def myid = id -1 
                          id = id -1 
+                         id_fornode = id_fornode +1
+                         def id_forn = id_fornode
                          echo "Testing on node [${mynode}]" 
-                        nodes["${node1}"] = {
+                        nodes["${node1}_${id_forn}"] = {
                        
 
                        /*     node("${mynode}"){*/
