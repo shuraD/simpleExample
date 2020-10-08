@@ -36,13 +36,13 @@ pipeline {
             steps {
                 script {
                     def tests = [:]
-                    for (f = 0; f <3; f++) {
+                    for (f = 0; f <10; f++) {
                         tests["${f}"] = {
                             node {
                                 stage("${f}") {
                                     echo "[${f}]"
                                     sh(script: "date -u")
-
+                                    sh(script: "sleep ${f}")
                                 }
                             }
                         }
