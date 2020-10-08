@@ -13,7 +13,7 @@ def printme(String myd,ind)
             echo "Testing on node [${myd}]"
             sh(script: "date -u")
             sh(script: "ifconfig | grep 192")
-            build job: 'daa', parameters: [string(name: 'GIT_BRANCH_NAME', value: env.BRANCH_NAME)]
+            build job: 'daaa', parameters: [string(name: 'GIT_BRANCH_NAME', value: env.BRANCH_NAME)]
             sh(script: "sleep ${ind}")
             sh(script: "date -u")
          
