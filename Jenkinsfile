@@ -1,19 +1,16 @@
 
 
 
-def performDeploymentStages(String node, String app) {
-    stage("build") {
-        echo "Building the app [${app}] on node [${node}]"
-        sh 'date -u'
-    }
-    stage("deploy") {
-        echo "Deploying the app [${app}] on node [${node}]"
-         sh 'date -u'
-    }
-    stage("test") {
-        echo "Testing the app [${app}] on node [${node}]"
-        sh 'date -u'
-    }
+def performDeploymentStages(String node) {
+                                node("${node}") {
+                                stage("${node}") {
+                                      echo "Testing on node [${node}]"
+                                    sh(script: "date -u")
+                                    sh(script: "ifconfig | grep 192")
+                                    sh(script: "sleep ${f}")
+                                    sh(script: "date -u")
+                                }
+                            }
 }
 
 
@@ -22,6 +19,7 @@ def performDeploymentStages(String node, String app) {
 
 properties([
     parameters([
+        string(name: 'NODES', defaultValue: '1,2', description: 'Nodes to build, deploy and test')
         string(name: 'countTotal', defaultValue: '4'),
         choice(name: 'servers', choices: ['all', '1', '2','3','4'], description: 'Run on specific platform'),
         choice(name: 'manage_steps', choices: ['all_tasks','common_task','deploy_task','test_task'], description: 'Choose task')
@@ -40,21 +38,12 @@ pipeline {
         stage('Parallel build') {
             steps {
                 script {
-                    def tests = [:]
-                    for (f = 0; f <params.countTotal.toInteger(); f++) {
-                        tests["${f}"] = {
-                            node(["${f}"]) {
-                                stage("${f}") {
-                                    echo "${f}]"
-                                    sh(script: "date -u")
-                                    sh(script: "ifconfig | grep 192")
-                                    sh(script: "sleep ${f}")
-                                    sh(script: "date -u")
-                                }
-                            }
-                        }
+                    def nodes = [:]
+                    for (node in params.NODES.tokenize(',')) {
+                        
+                            performDeploymentStages(node)
                     }
-                    parallel tests
+                    parallel nodes
                 }
             }
         }       
