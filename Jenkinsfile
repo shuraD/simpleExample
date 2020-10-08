@@ -6,14 +6,14 @@ def performDeploymentStages(String node) {
        }
 }
 
-def printme(String myd)
+def printme(String myd,ind)
 {
     stage("${myd}") {
          
             echo "Testing on node [${myd}]"
             sh(script: "date -u")
             sh(script: "ifconfig | grep 192")
-            sh(script: "sleep 2")
+            sh(script: "sleep ${ind}")
             sh(script: "date -u")
          
     }
@@ -38,11 +38,13 @@ pipeline {
             steps {
                 script {
                     def nodes = [:]
+                    def id = 3
                     for (node1 in params.NODES.tokenize(',')) {
                          def mynode = node1
+                         myid = id -1 
                         nodes["${node1}"] = {
                             node("${mynode}"){
-                                printme(mynode)
+                                printme(mynode,myid)
                             }  
                         
                         }
