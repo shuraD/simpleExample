@@ -11,7 +11,7 @@ def printme(String myd,ind)
     stage("${myd}") {
           
            def count = 5
-           for (int  i = 1; i <= ind; i++, fact *= i) {
+           for (int  i = 1; i <= ind; i++) {
                      sh(script: "sleep ${i}")
             } 
          
