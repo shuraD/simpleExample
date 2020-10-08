@@ -13,7 +13,7 @@ def printme(String myd,ind)
             echo "Testing on node [${myd}]"
             sh(script: "date -u")
             sh(script: "ifconfig | grep 192")
-            build job: daa
+            build job: 'daa'
             sh(script: "sleep ${ind}")
             sh(script: "date -u")
          
