@@ -32,17 +32,23 @@ properties([
 pipeline {
     agent any
     stages {
-        stage('1') {
+        stage('Non-Parallel Build') {
+            steps {
+                echo "Executing this stage first"
+            }
+        }
+        stage('Parallel build') {
             steps {
                 script {
                     def tests = [:]
-                    for (f = 0; f <10; f++) {
+                    for (f = 0; f <params.countTotal.toInteger(); f++) {
                         tests["${f}"] = {
                             node {
                                 stage("${f}") {
                                     echo "[${f}]"
                                     sh(script: "date -u")
                                     sh(script: "sleep ${f}")
+                                    sh(script: "date -u")
                                 }
                             }
                         }
