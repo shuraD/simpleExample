@@ -1,13 +1,9 @@
 def performDeploymentStages(String node) {
-                                    node("${node}") {
-                                stage("${node}") {
-                                      echo "Testing on node [${node}]"
-                                    sh(script: "date -u")
-                                    sh(script: "ifconfig | grep 192")
-                                    sh(script: "sleep ${node}")
-                                    sh(script: "date -u")
-                                }
-                            }
+    node("${node}") {
+        stage("${node}") {
+            echo "Testing on node [${node}]"
+        }
+    }
 }
 
 
