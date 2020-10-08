@@ -14,9 +14,7 @@ def printme(String myd,ind)
             sh(script: "date -u")
             sh(script: "ifconfig | grep 192")
             build job: 'daaa',
-              parameters: [string(name: 'TARGET_BRANCH', value: "${TARGET_BRANCH}"),
-                                       string(name: 'FRAMEWORK_VERSION', value: "${FRAMEWORK_VERSION}"),
-                                       [$class: 'NodeParameterValue',
+              parameters: [                                      [$class: 'NodeParameterValue',
                                         name: 'RUN_NODE', labels: [myd],
                                         nodeEligibility: [$class: 'IgnoreOfflineNodeEligibility']]],
              
