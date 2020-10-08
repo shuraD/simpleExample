@@ -9,7 +9,13 @@ def performDeploymentStages(String node) {
 def printme(String myd)
 {
     stage("${myd}") {
-        echo "Testing on node [${myd}]"
+         steps {
+            echo "Testing on node [${myd}]"
+            sh(script: "date -u")
+            sh(script: "ifconfig | grep 192")
+            sh(script: "sleep ${f}")
+            sh(script: "date -u")
+         }
     }
 }
 
