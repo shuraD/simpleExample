@@ -10,14 +10,16 @@ def printme(String myd,ind)
 {
     stage("${myd}") {
           
+           echo "Testing on node [${myd}]"
+           sh(script: "date -u")
            def count = 5
            for (int  i = 1; i <= ind; i++) {
-                     sh(script: "sleep ${i}")
+               echo "inside the loop ${i}"
+               sh(script: "sleep ${i}")
             } 
          
-            echo "Testing on node [${myd}]"
-            sh(script: "date -u")
-            sh(script: "ifconfig | grep 192")
+          
+           /* sh(script: "ifconfig | grep 192")*/
             build job: 'daaa',
               parameters: [
                        string(name: 'daa1', value: String.valueOf("daa ${myd} ${ind}")),
