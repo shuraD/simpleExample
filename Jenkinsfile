@@ -33,7 +33,7 @@ pipeline {
                     def nodes = [:]
                     for (node in params.NODES.tokenize(',')) {
                             echo "${node}"
-                            performDeploymentStages(node)
+                          
                     }
                     parallel nodes
                 }
