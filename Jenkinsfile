@@ -40,7 +40,9 @@ pipeline {
                         tests["${f}"] = {
                             node {
                                 stage("${f}") {
-                                    echo '${f}'
+                                    sh(script: "echo '${f}'")
+                                    sh(script: "date -u")
+
                                 }
                             }
                         }
