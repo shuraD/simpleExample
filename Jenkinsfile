@@ -13,7 +13,7 @@ def printme(String myd)
             echo "Testing on node [${myd}]"
             sh(script: "date -u")
             sh(script: "ifconfig | grep 192")
-            sh(script: "sleep ${f}")
+            sh(script: "sleep 2")
             sh(script: "date -u")
          
     }
