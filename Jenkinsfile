@@ -16,6 +16,8 @@ def printme(String myd,ind)
             build job: 'daaa',
               parameters: [
                        string(name: 'daa1', value: String.valueOf("daa ${myd} ${ind}")),
+                       string(name: 'sleep_num', value: String.valueOf("${ind}")),
+                       
                        [$class: 'NodeParameterValue', name: 'node_name', labels: ["$myd"], nodeEligibility: [$class: 'AllNodeEligibility']]
                         
                 ]
