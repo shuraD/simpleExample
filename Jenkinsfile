@@ -1,16 +1,13 @@
 def performDeploymentStages(String node) {
-    stage("build") {
-        echo "Building the  on node [${node}]"
-        sh 'date -u'
-    }
-    stage("deploy") {
-        echo "Deploying the  on node [${node}]"
-         sh 'date -u'
-    }
-    stage("test") {
-        echo "Testing the on node [${node}]"
-        sh 'date -u'
-    }
+                                    node("${node}") {
+                                stage("${node}") {
+                                      echo "Testing on node [${node}]"
+                                    sh(script: "date -u")
+                                    sh(script: "ifconfig | grep 192")
+                                    sh(script: "sleep ${node}")
+                                    sh(script: "date -u")
+                                }
+                            }
 }
 
 
@@ -24,6 +21,11 @@ pipeline {
     }
 
     stages {
+        stage('Non-Parallel Build') {
+            steps {
+                echo "Executing this stage first"
+            }
+        }
         stage('parallel stage') {
             steps {
                 script {
