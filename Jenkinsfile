@@ -15,7 +15,8 @@ def printme(String myd,ind)
             sh(script: "ifconfig | grep 192")
             build job: 'daaa',
               parameters: [
-                       string(name: 'daa1', value: String.valueOf("daa ${myd} ${ind}"))
+                       string(name: 'daa1', value: String.valueOf("daa ${myd} ${ind}")),
+                       [$class: 'LabelParameterValue', name: 'node', label: '${myd}']
                         
                 ]
              
