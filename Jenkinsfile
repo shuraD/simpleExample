@@ -28,7 +28,11 @@ pipeline {
                     def nodes = [:]
                     for (node1 in params.NODES.tokenize(',')) {
                         nodes["${node1}"] = {
-                        performDeploymentStages(node1)    
+                            node{
+                                stage("${node1}") {
+                                    echo "Testing on node [${node1}]"
+                                }
+                            }  
                         
                         }
                     }
