@@ -54,7 +54,7 @@ pipeline {
             steps {
                 script {
                     def nodes = [:]
-                    def id = 13
+                    def id = 3
                     for (node1 in params.NODES.tokenize(',')) {
                          def mynode = node1
                          def myid = id -1 
