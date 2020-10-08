@@ -39,7 +39,7 @@ def printme(String myd,ind)
 pipeline {
   agent any
    parameters {
-        string(name: 'NODES', defaultValue: '1,2,master', description: 'Nodes to build, deploy and test')
+        string(name: 'NODES', defaultValue: '1,2,1,1', description: 'Nodes to build, deploy and test')
         choice(name: 'ENV', choices: 'qa', description: 'Environment')
         string(name: 'APPS', defaultValue: 'app01,app02', description: 'App names')
     }
