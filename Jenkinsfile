@@ -43,10 +43,11 @@ pipeline {
                     def tests = [:]
                     for (f = 0; f <params.countTotal.toInteger(); f++) {
                         tests["${f}"] = {
-                            node {
+                            node("${f}") {
                                 stage("${f}") {
-                                    echo "${f}"
+                                    echo "${f}]"
                                     sh(script: "date -u")
+                                    sh(script: "ifconfig | grep 192")
                                     sh(script: "sleep ${f}")
                                     sh(script: "date -u")
                                 }
