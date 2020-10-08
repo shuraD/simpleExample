@@ -1,44 +1,43 @@
-def performDeploymentStages(String node) {
-                                node("${node}") {
-                                stage("${node}") {
-                                      echo "Testing on node [${node}]"
-                                    sh(script: "date -u")
-                                    sh(script: "ifconfig | grep 192")
-                                    sh(script: "sleep ${f}")
-                                    sh(script: "date -u")
-                                }
-                            }
+def performDeploymentStages(String node, String app) {
+    stage("build") {
+        echo "Building the app [${app}] on node [${node}]"
+        sh 'date -u'
+    }
+    stage("deploy") {
+        echo "Deploying the app ${app}] on node [${node}]"
+         sh 'date -u'
+    }
+    stage("test") {
+        echo "Testing the app [${app}] on node [${node}]"
+        sh 'date -u'
+    }
 }
-properties([
-    parameters([
-        string(name: 'NODES', defaultValue: '1,2', description: 'Nodes to build, deploy and test'),
-        string(name: 'countTotal', defaultValue: '4'),
-        choice(name: 'servers', choices: ['all', '1', '2','3','4'], description: 'Run on specific platform'),
-        choice(name: 'manage_steps', choices: ['all_tasks','common_task','deploy_task','test_task'], description: 'Choose task')
-    ])
-])
+
 
 
 pipeline {
-    agent any
+  agent any
+   parameters {
+        string(name: 'NODES', defaultValue: '1,2', description: 'Nodes to build, deploy and test')
+        choice(name: 'ENV', choices: 'qa', description: 'Environment')
+        string(name: 'APPS', defaultValue: 'app01,app02', description: 'App names')
+    }
+
     stages {
-        stage('Non-Parallel Build') {
-            steps {
-                echo "Executing this stage first"
-            }
-        }
-        stage('Parallel build') {
+        stage('parallel stage') {
             steps {
                 script {
                     def nodes = [:]
                     for (node in params.NODES.tokenize(',')) {
-                            echo "${node}"
-                          
-                          
+                        def apps = [:]
+                        for (app in params.APPS.tokenize(',')) {
+                            performDeploymentStages(node, app)
+                        }
+                        parallel apps
                     }
                     parallel nodes
                 }
             }
-        }       
+        }
     }
 }
