@@ -19,7 +19,7 @@ def performDeploymentStages(String node) {
 
 properties([
     parameters([
-        string(name: 'NODES', defaultValue: '1,2', description: 'Nodes to build, deploy and test')
+        string(name: 'NODES', defaultValue: '1,2', description: 'Nodes to build, deploy and test'),
         string(name: 'countTotal', defaultValue: '4'),
         choice(name: 'servers', choices: ['all', '1', '2','3','4'], description: 'Run on specific platform'),
         choice(name: 'manage_steps', choices: ['all_tasks','common_task','deploy_task','test_task'], description: 'Choose task')
