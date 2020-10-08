@@ -8,6 +8,7 @@ def performDeploymentStages(String node) {
 
 
 
+
 pipeline {
   agent any
    parameters {
@@ -27,10 +28,11 @@ pipeline {
                 script {
                     def nodes = [:]
                     for (node1 in params.NODES.tokenize(',')) {
+                         def mynode = node1
                         nodes["${node1}"] = {
                             node{
-                                stage("${node1}") {
-                                    echo "Testing on node [${node1}]"
+                                stage("${mynode}") {
+                                    echo "Testing on node [${mynode}]"
                                 }
                             }  
                         
