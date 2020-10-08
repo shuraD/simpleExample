@@ -1,5 +1,5 @@
 def performDeploymentStages(String node) {
-    node("${node}") {
+    node {
         stage("${node}") {
             echo "Testing on node [${node}]"
         }
