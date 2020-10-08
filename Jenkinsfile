@@ -59,6 +59,7 @@ pipeline {
                          def mynode = node1
                          def myid = id -1 
                          id = id -1 
+                         echo "Testing on node [${mynode}]" 
                         nodes["${node1}"] = {
                        
 
