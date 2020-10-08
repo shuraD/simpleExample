@@ -6,7 +6,12 @@ def performDeploymentStages(String node) {
        }
 }
 
-
+def printme(String myd)
+{
+    stage("${myd}") {
+        echo "Testing on node [${myd}]"
+    }
+}
 
 
 pipeline {
@@ -31,9 +36,7 @@ pipeline {
                          def mynode = node1
                         nodes["${node1}"] = {
                             node{
-                                stage("${mynode}") {
-                                    echo "Testing on node [${mynode}]"
-                                }
+                                printme(mynode)
                             }  
                         
                         }
