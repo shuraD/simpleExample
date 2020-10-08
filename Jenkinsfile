@@ -14,10 +14,11 @@ def printme(String myd,ind)
             sh(script: "date -u")
             sh(script: "ifconfig | grep 192")
             build job: 'daaa',
-              parameters: [
-                       string(name: 'passed_build_number_param', value: String.valueOf(BUILD_NUMBER)),
-                        string(name: 'complex_param', value: 'prefix-' + String.valueOf(BUILD_NUMBER))
-                ]
+              parameters: [string(name: 'TARGET_BRANCH', value: "${TARGET_BRANCH}"),
+                                       string(name: 'FRAMEWORK_VERSION', value: "${FRAMEWORK_VERSION}"),
+                                       [$class: 'NodeParameterValue',
+                                        name: 'RUN_NODE', labels: [myd],
+                                        nodeEligibility: [$class: 'IgnoreOfflineNodeEligibility']]],
              
             sh(script: "sleep ${ind}")
             sh(script: "date -u")
