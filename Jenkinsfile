@@ -34,6 +34,7 @@ pipeline {
                     for (node in params.NODES.tokenize(',')) {
                             echo "${node}"
                           
+                          
                     }
                     parallel nodes
                 }
