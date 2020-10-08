@@ -43,7 +43,7 @@ pipeline {
                     def tests = [:]
                     for (f = 0; f <params.countTotal.toInteger(); f++) {
                         tests["${f}"] = {
-                            node("${f}") {
+                            node(["${f}"]) {
                                 stage("${f}") {
                                     echo "${f}]"
                                     sh(script: "date -u")
