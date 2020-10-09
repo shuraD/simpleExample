@@ -49,6 +49,7 @@ value: """a, b, c, d, e, f""",
 defaultValue: "d, f",
 description: "Select your favorite letter(s)"
 )
+
     }
 
     stages {
