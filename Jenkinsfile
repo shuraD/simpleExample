@@ -41,7 +41,14 @@ pipeline {
    parameters {
         string(name: 'NODES', defaultValue: '1,2,1,1', description: 'Nodes to build, deploy and test')
         choice(name: 'ENV', choices: 'qa', description: 'Environment')
-        string(name: 'APPS', defaultValue: 'app01,app02', description: 'App names')
+        string(name: 'urls', defaultValue: 'app01,app02', description: 'App names')
+        extendedChoice(name: "favorite_letters",
+type: "PT_CHECKBOX",
+multiSelectDelimiter: " ", // this only defines delimiter used in the output string value, not used for parsing value input, which must be comma-separated!
+value: """a, b, c, d, e, f""",
+defaultValue: "d, f",
+description: "Select your favorite letter(s)"
+)
     }
 
     stages {
